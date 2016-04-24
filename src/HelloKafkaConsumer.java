@@ -19,7 +19,7 @@ import kafka.message.MessageAndOffset;
  */
 public class HelloKafkaConsumer extends  Thread {
     final static String clientId = "SimpleConsumerDemoClient";
-    final static String TOPIC = "NC";
+    final static String TOPIC = "1";
     ConsumerConnector consumerConnector;
 
 
@@ -43,8 +43,9 @@ public class HelloKafkaConsumer extends  Thread {
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
         KafkaStream<byte[], byte[]> stream =  consumerMap.get(TOPIC).get(0);
         ConsumerIterator<byte[], byte[]> it = stream.iterator();
-        while(it.hasNext())
-            System.out.println(new String(it.next().message()));
+        while(it.hasNext()){
+            System.out.println(new String(it.next().message())+" Time: "+System.currentTimeMillis());
+        }
 
     }
 
